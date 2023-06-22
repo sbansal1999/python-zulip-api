@@ -36,6 +36,7 @@ if __name__ == "__main__":
     parser.add_argument("--stream", default="general")
     parser.add_argument("--topic", default="IRC")
     parser.add_argument("--nickserv-pw", default="")
+    parser.add_argument("--sasl-login", default="")
 
     options = parser.parse_args()
     # Setting the client to irc_mirror is critical for this to work
@@ -64,5 +65,6 @@ if __name__ == "__main__":
         options.irc_server,
         options.nickserv_pw,
         options.port,
+        options.sasl_login,
     )
     bot.start()
