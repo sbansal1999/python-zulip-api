@@ -20,6 +20,7 @@ class IRCBot(irc.bot.SingleServerIRCBot):
         server: str,
         nickserv_password: str = "",
         port: int = 6667,
+        sasl_login: str = "",
     ) -> None:
         self.channel = channel  # type: irc.bot.Channel
         self.zulip_client = zulip_client
@@ -27,10 +28,11 @@ class IRCBot(irc.bot.SingleServerIRCBot):
         self.topic = topic
         self.IRC_DOMAIN = server
         self.nickserv_password = nickserv_password
+        self.sasl_login = sasl_login
         # Make sure the bot is subscribed to the stream
         self.check_subscription_or_die()
         # Initialize IRC bot after proper connection to Zulip server has been confirmed.
-        irc.bot.SingleServerIRCBot.__init__(self, [(server, port)], nickname, nickname)
+        irc.bot.SingleServerIRCBot.__init__(self, [(server, port)], nickname, nickname, sasl_login)
 
     def zulip_sender(self, sender_string: str) -> str:
         nick = sender_string.split("!")[0]
